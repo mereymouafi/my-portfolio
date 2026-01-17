@@ -1,0 +1,43 @@
+# .gitignore = Liste de fichiers à NE PAS envoyer sur GitHub
+# C'est OBLIGATOIRE pour:
+
+# 🔒 Protéger tes mots de passe
+# 💾 Ne pas surcharger GitHub
+# 🧹 Garder ton projet propre 
+
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Flask
+instance/
+.env
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS - Windows
+Thumbs.db
+Desktop.ini
+
+# OS - Mac
+.DS_Store
+
+# Logs
+*.log
