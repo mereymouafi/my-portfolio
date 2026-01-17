@@ -1,6 +1,4 @@
 // Custom Cursor
-const cursor = document.querySelector('.cursor');
-const cursorDot = document.querySelector('.cursor-dot');
 
 document.addEventListener('mousemove', (e) => {
     cursor.style.left = e.clientX + 'px';
@@ -33,6 +31,125 @@ for (let i = 0; i < 20; i++) {
     particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
     particlesContainer.appendChild(particle);
 }
+
+
+
+
+
+
+
+const navItems = document.querySelectorAll('.side-nav-item');
+        const sideNav = document.querySelector('.side-nav');
+        
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        
+        // Show/hide nav on scroll and mouse movement
+        function showNav() {
+            sideNav.classList.add('visible');
+            
+            // Clear existing timeout
+            clearTimeout(scrollTimeout);
+            
+            // Hide after 3 seconds of inactivity
+            scrollTimeout = setTimeout(() => {
+                sideNav.classList.remove('visible');
+            }, 3000);
+        }
+        
+        // Show nav on scroll
+        window.addEventListener('scroll', () => {
+            showNav();
+            lastScrollTop = window.pageYOffset;
+        });
+        
+        // Show nav on mouse movement near top
+        document.addEventListener('mousemove', (e) => {
+            if (e.clientY < 100) {
+                showNav();
+            }
+        });
+        
+        // Show nav on touch
+        document.addEventListener('touchstart', () => {
+            showNav();
+        });
+        
+        // Keep nav visible when hovering over it
+        sideNav.addEventListener('mouseenter', () => {
+            clearTimeout(scrollTimeout);
+            sideNav.classList.add('visible');
+        });
+        
+        sideNav.addEventListener('mouseleave', () => {
+            scrollTimeout = setTimeout(() => {
+                sideNav.classList.remove('visible');
+            }, 2000);
+        });
+
+        // Click handler
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                const section = document.getElementById(this.dataset.section);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Active on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['hero', 'about', 'skills', 'projects', 'experience', 'contact'];
+            
+            let current = '';
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 200) {
+                        current = sectionId;
+                    }
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.section === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('.side-nav');
+            if (!nav.contains(e.target)) {
+                document.querySelector('.nav-links').classList.remove('active');
+            }
+        });
+        
+        // Show nav initially for 3 seconds
+        showNav();
+
+
+
+
+
+
+
+
+
+
 
 // Scroll to Section
 function scrollToSection(id) {
