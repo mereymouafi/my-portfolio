@@ -1,0 +1,11 @@
+.testimonial-initials {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #9cb0c4;
+  border-radius: 50%;
+  color: #6dbdff;
+  font-weight: 700;
+}
