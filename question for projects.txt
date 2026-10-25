@@ -1,3 +1,0 @@
-• Who will use this?
-• What behavior must it support?
-• What will fail in production?
